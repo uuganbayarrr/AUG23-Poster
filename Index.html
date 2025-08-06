@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Hiking Event Poster</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .poster {
+
+            background: linear-gradient(180deg, #a1c4fd 0%, #ffe4e1 50%, #f5f5f5 100%);
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .poster:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Mountain silhouette */
+        .mountains {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 350px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><path d="M0,400 L0,220 L150,120 L350,200 L550,80 L750,180 L950,100 L1200,220 L1200,400 Z" fill="%232D3748" opacity="0.9"/><path d="M0,400 L0,280 L250,180 L450,250 L650,150 L850,220 L1100,180 L1200,280 L1200,400 Z" fill="%231A202C" opacity="0.95"/><path d="M0,400 L0,320 L200,270 L400,300 L600,240 L800,280 L1000,250 L1200,320 L1200,400 Z" fill="%23171824" opacity="1"/></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #ffeb3b, #ff9800);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Content container */
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            text-align: center;
+            color: #1a202c;
+        }
+        
+        /* Header */
+        .header {
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h2 {
+            font-size: 22px;
+            font-weight: 400;
+            color: #4a5568;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Date badge */
+        .date-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+            transition: transform 0.2s ease;
+        }
+        
+        .date-badge:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Info cards */
+        .info-section {
+            margin: 30px 0;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .info-card h3 {
+            font-size: 16px;
+            color: #1a202c;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .info-card p {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .info-item .icon {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        
+        .info-item h4 {
+            font-size: 13px;
+            color: #718096;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        
+        .info-item p {
+            font-size: 15px;
+            color: #1a202c;
+            font-weight: 600;
+        }
+        
+        /* Activities */
+        .activities {
+            display: block; /* Ensure visibility on desktop */
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Prevent content overflow */
+        }
+        
+        .activities h3 {
+            font-size: 18px;
+            color: #1a202c;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .activity-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Allow wrapping for responsiveness */
+        }
+        
+        .activity {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            width: 100px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .activity:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .activity-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #ff6b6b;
+        }
+        
+        .activity p {
+            font-size: 12px;
+            color: #1a202c;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        /* Weather info */
+        .weather-info {
+            background: linear-gradient(135deg, #ffd700, #ffca28);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin: 15px 0;
+            display: inline-block;
+            box-shadow: 0 3px 12px rgba(255, 215, 0, 0.3);
+        }
+        
+        .weather-info p {
+            font-size: 15px;
+            color: #1a202c;
+            font-weight: 500;
+        }
+        
+        /* Decorative elements */
+        .bird {
+            position: absolute;
+            font-size: 18px;
+            color: #2d3748;
+            animation: fly 12s infinite linear;
+        }
+        
+        .bird1 {
+            top: 100px;
+            left: 40px;
+            animation-delay: 0s;
+        }
+        
+        .bird2 {
+            top: 160px;
+            left: 120px;
+            animation-delay: 4s;
+        }
+        
+        @keyframes fly {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(500px); }
+        }
+        
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+            animation: drift 20s infinite linear;
+        }
+        
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+        }
+        
+        .cloud1 {
+            width: 70px;
+            height: 25px;
+            top: 50px;
+            left: 30px;
+        }
+        
+        .cloud1::before {
+            width: 35px;
+            height: 35px;
+            top: -18px;
+            left: 15px;
+        }
+        
+        .cloud1::after {
+            width: 45px;
+            height: 30px;
+            top: -12px;
+            right: 15px;
+        }
+        
+        @keyframes drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(300px); }
+        }
+        
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff6b6b, #ff8a8a);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 0 30px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+            z-index: 20;
+            transition: transform 0.2s ease;
+            overflow: hidden;
+        }
+        
+        .footer:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer p {
+            font-size: 15px;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        
+        .loc-map {
+            width: 24rem;
+            height: 12rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .poster {
+                width: 100%;
+                height: auto;
+                min-height: 800px; /* Increased to accommodate extra activities */
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .header h2 {
+                font-size: 18px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .loc-map {
+                width: 100%;
+                height: 10rem;
+            }
+            
+            .activities {
+                padding: 15px;
+            }
+            
+            .activity {
+                width: 80px; /* Smaller for mobile */
+            }
+            
+            .activity-icon {
+                font-size: 24px;
+            }
+            
+            .activity p {
+                font-size: 11px;
+            }
+            
+            .footer {
+                margin: 0 15px;
+                padding: 10px;
+            }
+            
+            .footer p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- Background elements -->
+        <div class="sun"></div>
+        <div class="cloud cloud1"></div>
+        <div class="bird bird1">🦅</div>
+        <div class="bird bird2">🦅</div>
+        <div class="mountains"></div>
+        
+        <!-- Main content -->
+        <div class="content">
+            <!-- Header -->
+            <div class="header"><br>
+                <h1>Уулын Аялал</h1>
+                <h2>Mountain Hiking Adventure</h2>
+            </div>
+            
+            
+            <!-- Destination -->
+            <div class="info-card">
+                <h3>🏔️ Очих газар / Destination</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.8048337475498!2d107.0503429121963!3d47.86499497109469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969a6d3ff31dfb%3A0x67ce408ba1729696!2z0J7QtNC-0L0g0L7RgNC-0L0g0YHRg9C00LvQsNGFINC-0YDQs9C40LsgKNCe0J7QodCeKSDQqNCj0JAt0J7QntCT0KUgQXN0cm9ub21pY2FsIE9ic2VydmF0b3J5IG9mIElBRywgTUFT!5e1!3m2!1sen!2smn!4v1754454393636!5m2!1sen!2smn" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="loc-map"></iframe>
+                <p style="font-size: 20px; font-weight: 600; color: #1a202c;">Хүрэл тогоот</p>
+                <a href="https://maps.app.goo.gl/WBeMjpJoFM7hiScR9" style="font-size: 11px; font-weight: 600; color: #6f8dc1; text-decoration: none;">Харах</a>
+            </div>
+            
+            <!-- Date -->
+            <div class="date-badge">
+                🗓️ 8 сарын 23
+            </div>
+
+            <!-- Time and Location Grid -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="icon">📍</div>
+                    <h4>Хөдлөх газар</h4>
+                    <a href="https://maps.app.goo.gl/EDYDHnQUkhGJDgw88" style="text-decoration: none; color: #000;">Хаан товер</a>
+                </div>
+                <div class="info-item">
+                    <div class="icon">⏰</div>
+                    <h4>Цаг</h4>
+                    <p>09:00 - 14:00</p>
+                </div>
+            </div>
+            
+            <!-- Weather -->
+            <div class="weather-info">
+                <a href="https://www.accuweather.com/en/mn/ulan-bator/246421/daily-weather-forecast/246421?day=18" style="text-decoration: none; color: #000;" >☀️ Нартай өдөр • Нимгэн хувцаслаарай</a>
+            </div>
+            
+            <!-- Activities -->
+            <div class="activities">
+                <h3>Үйл ажиллагаа / Activities</h3>
+                <div class="activity-list">
+                    <div class="activity">
+                        <div class="activity-icon">🎮</div>
+                        <p>Хөгжөөнт<br>тоглоом</p>
+                    </div>
+                    <div class="activity">
+                        <div class="activity-icon">🥩</div>
+                        <p>Мах<br>шаралт</p>
+                    </div>
+                    <div class="activity">
+                        <div class="activity-icon">📸</div>
+                        <p>Гэрэл зураг<br>авах</p>
+                    </div>
+                    <div class="activity">
+                        <div class="activity-icon">🏞️</div>
+                        <p>Байгаль<br>судлах</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Бүгдээрээ хамтдаа • Let's hike together!</p>
+        </div>
+    </div>
+</body>
+</html>
